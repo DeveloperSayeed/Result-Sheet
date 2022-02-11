@@ -36,23 +36,24 @@ function Result() {
     }
 
     this.finalCgpa = function (bangla, english, math, sceince, SSceince,
-        history, relegion) {
+        hist, relegion) {
         let totalgpa =
             this.result(bangla).gpacal +
             this.result(english).gpacal +
             this.result(math).gpacal +
             this.result(sceince).gpacal +
             this.result(SSceince).gpacal +
-            this.result(history).gpacal;
+            this.result(hist).gpacal+
             this.result(relegion).gpacal;
 
         let finalscgpa = totalgpa / 7;
+        
 
         if (
             bangla < 33 || english < 33 || math < 33 || sceince < 33 || SSceince < 33 ||
-            history < 33 || relegion < 33) {
+            hist < 33 || relegion < 33) {
             finalscgpa = 0;
-            finalgread = "Faild";
+            finalgread = `<p class=" text-danger m-0"> Failed</p> `;
         } else if (finalscgpa >= 1 && finalscgpa < 2) {
 
             finalgread = "D";
@@ -74,7 +75,7 @@ function Result() {
         }
 
         return {
-            rescgpa: finalscgpa == 0 ? '' : finalscgpa.toFixed(2),
+            rescgpa: finalscgpa == 0 ? `<p class=" text-danger m-0"> Failed</p> ` : finalscgpa.toFixed(2),
             resgread: finalgread,
         }
     };

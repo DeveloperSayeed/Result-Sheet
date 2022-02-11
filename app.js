@@ -5,6 +5,7 @@ const viewbtn = document.getElementById("viewbtn")
 const delbtn = document.getElementById("delbtn")
 const customAlert = document.querySelector(".custom-alert")
 
+let stresult = new Result()
 
 // regelural Expration
 let Rexname = /^[a-zA-Z\s]*$/
@@ -21,7 +22,7 @@ studentForm.addEventListener("submit", function (e) {
     let math = document.querySelector("input[ placeholder='Math']")
     let sceince = document.querySelector("input[ placeholder='Sceince']")
     let SSceince = document.querySelector("input[ placeholder='Soical-Sceince']")
-    let history = document.querySelector("input[ placeholder='History']")
+    let hist = document.querySelector("input[ placeholder='History']")
     let relegion = document.querySelector("input[ placeholder='Relegion']")
 
     let gend = document.querySelector("input[type='radio']:checked")
@@ -29,7 +30,7 @@ studentForm.addEventListener("submit", function (e) {
 
 
 
-    if (stuName.value == "" || stuRoll.value == "" || stuimg.value == "" || bangla.value == "" || english.value == "" || math.value == "" || sceince.value == "" || SSceince.value == "" || history.value == "" || relegion.value == "" || stclass.value == "") {
+    if (stuName.value == "" || stuRoll.value == "" || stuimg.value == "" || bangla.value == "" || english.value == "" || math.value == "" || sceince.value == "" || SSceince.value == "" || hist.value == "" || relegion.value == "" || stClass.value == "") {
         result.innerHTML = `<p class="alert alert-danger">All Field Required</p>`
     } else {
         result.innerHTML = `<p class="alert alert-success"> Successful</p>`
@@ -49,7 +50,7 @@ studentForm.addEventListener("submit", function (e) {
             math: math.value,
             sceince: sceince.value,
             SSceince: SSceince.value,
-            history: history.value,
+            history: hist.value,
             relegion: relegion.value
         })
 
@@ -77,8 +78,8 @@ function allresultdata() {
         <td>${student.class}</td>
         <td>${student.roll}</td>
         <td>${student.gender}</td>
-        <td>A</td>
-        <td>4.52</td>
+        <td>${stresult.finalCgpa(student.bangla, student.english, student.math, student.sceince, student.SSceince, student.history, student.relegion).rescgpa}</td>
+        <td>${stresult.finalCgpa(student.bangla, student.english, student.math, student.sceince, student.SSceince, student.history, student.relegion).resgread}</td>
         <td><img style="height: 40px; width: 40px; object-fit: cover;"
                 src="${student.photo}"
                 alt=""></td>
@@ -108,13 +109,15 @@ function removedata(id) {
     }
 
 }
-let stresult = new Result()
+
+
 
 // modal function
 const studentModal = document.querySelector(".student-modal")
 
 function studentModalResult(index){
 
+    
     
     let studentdata = getdata('student_result');
     studentModal.innerHTML= `
